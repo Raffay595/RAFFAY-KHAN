@@ -1,0 +1,1 @@
+const http = require('https'); http.get('https://cdn.jsdelivr.net/npm/ogl@latest/dist/ogl.umd.js', (res) => { let data = ''; res.on('data', c => data+=c); res.on('end', () => { try { new Function(data)(); console.log(Object.keys(global.ogl)); } catch(e) { console.error(e); } }); });

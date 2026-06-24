@@ -1,0 +1,128 @@
+/* ─── Custom Cursor ─────────────────────────────────────── */
+
+/* Hide default cursor everywhere */
+*,
+*::before,
+*::after {
+  cursor: none !important;
+}
+
+/* ── Shared base ── */
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 99999;
+  will-change: transform, opacity;
+  border-radius: 50%;
+  opacity: 0;                       /* hidden until JS positions them */
+  transition: opacity 0.3s ease;
+}
+
+/* ── Inner dot ── */
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: #ff5637;
+  box-shadow:
+    0 0 6px  rgba(255, 86, 55, 0.55),
+    0 0 14px rgba(255, 86, 55, 0.25);
+  transition:
+    width      0.25s cubic-bezier(0.23, 1, 0.32, 1),
+    height     0.25s cubic-bezier(0.23, 1, 0.32, 1),
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    opacity    0.3s ease;
+}
+
+/* ── Outer ring ── */
+.cursor-ring {
+  width: 48px;
+  height: 48px;
+  border: 2px solid rgba(255, 86, 55, 0.60);
+  background: transparent;
+  box-shadow:
+    0 0 8px  rgba(255, 86, 55, 0.12),
+    inset 0 0 8px rgba(255, 86, 55, 0.06);
+  transition:
+    width        0.35s cubic-bezier(0.23, 1, 0.32, 1),
+    height       0.35s cubic-bezier(0.23, 1, 0.32, 1),
+    border-color 0.35s ease,
+    border-radius 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+    background   0.35s ease,
+    box-shadow   0.35s ease,
+    opacity      0.3s ease;
+}
+
+/* ── Visible state (set by JS) ── */
+.cursor-dot.is-visible,
+.cursor-ring.is-visible {
+  opacity: 1;
+}
+
+/* ── Hover interactive elements — size unchanged, subtle glow only ── */
+.cursor-ring.is-hovering {
+  border-color: rgba(255, 86, 55, 0.50);
+  box-shadow:
+    0 0 10px rgba(255, 86, 55, 0.18),
+    inset 0 0 6px rgba(255, 86, 55, 0.08);
+}
+
+.cursor-dot.is-hovering {
+  box-shadow:
+    0 0 8px rgba(255, 86, 55, 0.65),
+    0 0 18px rgba(255, 86, 55, 0.25);
+}
+
+/* ── Mouse down ── */
+.cursor-dot.is-pressing {
+  width: 5px;
+  height: 5px;
+  background: #ffb4a5;
+}
+
+.cursor-ring.is-pressing {
+  width: 36px;
+  height: 36px;
+  border-color: rgba(255, 180, 165, 0.50);
+}
+
+/* ring + hover + pressing combo */
+.cursor-ring.is-hovering.is-pressing {
+  width: 56px;
+  height: 56px;
+}
+
+/* ── Text input hover ── */
+.cursor-ring.is-text {
+  width: 4px;
+  height: 32px;
+  border-radius: 2px;
+  border-color: rgba(255, 86, 55, 0.65);
+  background: rgba(255, 86, 55, 0.12);
+}
+
+.cursor-dot.is-text {
+  opacity: 0;
+}
+
+/* ── Hidden when outside viewport ── */
+.cursor-dot.is-hidden,
+.cursor-ring.is-hidden {
+  opacity: 0;
+}
+
+/* ── Disable on touch devices ── */
+@media (hover: none) and (pointer: coarse) {
+  *,
+  *::before,
+  *::after {
+    cursor: auto !important;
+  }
+  .cursor-dot,
+  .cursor-ring {
+    display: none !important;
+  }
+}

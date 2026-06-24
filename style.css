@@ -1,0 +1,136 @@
+/* Custom premium styling extending Tailwind for M Raffay Khan Portfolio */
+
+body {
+    background-color: #131313;
+    color: #e5e2e1;
+    overflow-x: hidden;
+}
+
+/* Custom Selection Highlight */
+::selection {
+    background-color: #ff5637;
+    color: #ffffff;
+}
+
+/* Glassmorphism Frosted Styling */
+.glass {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(24px) saturate(120%);
+    -webkit-backdrop-filter: blur(24px) saturate(120%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Outlined Text Styling */
+.outline-text {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.15);
+    color: transparent;
+    transition: -webkit-text-stroke 0.3s ease;
+}
+
+.group:hover .outline-text {
+    -webkit-text-stroke: 1px rgba(255, 86, 55, 0.6);
+}
+
+/* Brand Gradient Text */
+.primary-gradient-text {
+    background: linear-gradient(135deg, #ffb4a5 0%, #ff5637 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Custom Portrait Masking */
+.hero-portrait {
+    mask-image: linear-gradient(to bottom, black 82%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 82%, transparent 100%);
+}
+
+/* Scrolling background text marquee */
+.bg-text-scroll {
+    display: inline-block;
+    white-space: nowrap;
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 16vw;
+    line-height: 1;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.015);
+    letter-spacing: -0.02em;
+    animation: scroll-marquee 40s linear infinite;
+    will-change: transform;
+}
+
+@keyframes scroll-marquee {
+    0% {
+        transform: translate3d(50%, 0, 0);
+    }
+    100% {
+        transform: translate3d(-100%, 0, 0);
+    }
+}
+
+/* Navigation link active indicator styling */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0%;
+    height: 1px;
+    background-color: #ff5637;
+    transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+.nav-link.active {
+    color: #ff5637 !important;
+}
+
+/* Interactive card transitions */
+.group:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+}
+
+/* Custom scroll bar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #0e0e0e;
+}
+::-webkit-scrollbar-thumb {
+    background: #2a2a2a;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #ff5637;
+}
+
+/* Progressive Intersection Observer Reveal Animations */
+.reveal-item {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s cubic-bezier(0.215, 0.610, 0.355, 1), transform 1s cubic-bezier(0.215, 0.610, 0.355, 1);
+}
+
+.reveal-item.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Interactive DotField Container */
+.dot-field-container {
+    width: 100%;
+    height: 100%;
+}
