@@ -64,45 +64,13 @@
     });
     wrapper.appendChild(prelayersContainer);
 
-    /* ---- Header (toggle button only – logo already in navbar) ---- */
-    const header = document.createElement('header');
-    header.className = 'sm-header';
-    header.setAttribute('aria-label', 'Mobile menu toggle');
-
-    toggleBtn = document.createElement('button');
-    toggleBtn.className = 'sm-toggle';
-    toggleBtn.setAttribute('aria-label', 'Open menu');
-    toggleBtn.setAttribute('aria-expanded', 'false');
-    toggleBtn.setAttribute('aria-controls', 'sm-panel');
-    toggleBtn.type = 'button';
-
-    // Text cycling wrapper
-    textWrap = document.createElement('span');
-    textWrap.className = 'sm-toggle-textWrap';
-    textWrap.setAttribute('aria-hidden', 'true');
-
-    textInner = document.createElement('span');
-    textInner.className = 'sm-toggle-textInner';
-    setTextLines(['Menu', 'Close']);
-    textWrap.appendChild(textInner);
-    toggleBtn.appendChild(textWrap);
-
-    // Icon (plus → X)
-    iconEl = document.createElement('span');
-    iconEl.className = 'sm-icon';
-    iconEl.setAttribute('aria-hidden', 'true');
-
-    plusH = document.createElement('span');
-    plusH.className = 'sm-icon-line';
-    plusV = document.createElement('span');
-    plusV.className = 'sm-icon-line';
-
-    iconEl.appendChild(plusH);
-    iconEl.appendChild(plusV);
-    toggleBtn.appendChild(iconEl);
-
-    header.appendChild(toggleBtn);
-    wrapper.appendChild(header);
+    /* ---- Toggle button lives inside the main navbar ---- */
+    toggleBtn = document.getElementById('sm-toggle-btn');
+    textInner = document.getElementById('sm-toggle-textInner');
+    iconEl    = document.getElementById('sm-icon');
+    plusH     = document.getElementById('sm-plusH');
+    plusV     = document.getElementById('sm-plusV');
+    textWrap  = toggleBtn.querySelector('.sm-toggle-textWrap');
 
     /* ---- Panel ---- */
     panel = document.createElement('aside');
