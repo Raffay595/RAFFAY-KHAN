@@ -11,11 +11,7 @@
 (function () {
   'use strict';
 
-  /* ── Bail on touch-only devices ── */
-  if (typeof matchMedia !== 'undefined' &&
-      matchMedia('(hover: none) and (pointer: coarse)').matches) {
-    return;
-  }
+
 
   /* ── Config ── */
   const LERP_SPEED = 0.15;          // ring easing (lower = more lag)
@@ -144,12 +140,54 @@
     setPress(false);
   }
 
+  /* ── Event: touch start / move / end ── */
+  function onTouchStart(e) {
+    if (e.touches && e.touches.length > 0) {
+      const touch = e.touches[0];
+      mouseX = touch.clientX;
+      mouseY = touch.clientY;
+      if (!visible) {
+        ringX = mouseX;
+        ringY = mouseY;
+        setVisible(true);
+      }
+      setPress(true);
+
+      const target = e.target;
+      if (target && target.closest) {
+        setText(!!target.closest(TEXT_SELECTORS));
+        setHover(!textMode && !!target.closest(HOVER_SELECTORS));
+      }
+    }
+  }
+
+  function onTouchMove(e) {
+    if (e.touches && e.touches.length > 0) {
+      const touch = e.touches[0];
+      mouseX = touch.clientX;
+      mouseY = touch.clientY;
+      if (!visible) setVisible(true);
+    }
+  }
+
+  function onTouchEnd() {
+    setPress(false);
+    setHover(false);
+    setText(false);
+    setVisible(false);
+  }
+
   /* ── Bind events ── */
   document.addEventListener('mousemove',  onMouseMove,  { passive: true });
   document.addEventListener('mouseenter', onMouseEnter);
   document.addEventListener('mouseleave', onMouseLeave);
   document.addEventListener('mousedown',  onMouseDown);
   document.addEventListener('mouseup',    onMouseUp);
+
+  document.addEventListener('touchstart', onTouchStart, { passive: true });
+  document.addEventListener('touchmove',  onTouchMove,  { passive: true });
+  document.addEventListener('touchend',   onTouchEnd,   { passive: true });
+  document.addEventListener('touchcancel',onTouchEnd,   { passive: true });
 
   /* ── Start render loop ── */
   rafId = requestAnimationFrame(render);

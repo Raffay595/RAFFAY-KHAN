@@ -60,27 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     initParticles();
 
-    // --- Mobile Navigation Drawer Control ---
-    const mobileDrawer = document.getElementById('mobile-drawer');
-    const openDrawerBtn = document.getElementById('open-drawer');
-    const closeDrawerBtn = document.getElementById('close-drawer');
-    const drawerLinks = document.querySelectorAll('.drawer-link');
 
-    const toggleDrawer = (isOpen) => {
-        if (isOpen) {
-            mobileDrawer.classList.remove('translate-x-full');
-            document.body.classList.add('overflow-hidden');
-        } else {
-            mobileDrawer.classList.add('translate-x-full');
-            document.body.classList.remove('overflow-hidden');
-        }
-    };
 
-    openDrawerBtn?.addEventListener('click', () => toggleDrawer(true));
-    closeDrawerBtn?.addEventListener('click', () => toggleDrawer(false));
-    drawerLinks.forEach(link => {
-        link.addEventListener('click', () => toggleDrawer(false));
-    });
 
     // --- Header Background Change on Scroll ---
     const headerNav = document.querySelector('nav');

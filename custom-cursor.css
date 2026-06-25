@@ -114,15 +114,3 @@
   opacity: 0;
 }
 
-/* ── Disable on touch devices ── */
-@media (hover: none) and (pointer: coarse) {
-  *,
-  *::before,
-  *::after {
-    cursor: auto !important;
-  }
-  .cursor-dot,
-  .cursor-ring {
-    display: none !important;
-  }
-}

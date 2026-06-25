@@ -1,0 +1,84 @@
+/* ── Rotating Text ─────────────────────────────────────── */
+
+.rotating-text-container {
+  display: inline-flex;
+  position: relative;
+  overflow: hidden;
+  vertical-align: bottom;
+  background: #ffffff;
+  color: #ff5637; /* Theme vibrant orange-red */
+  padding: 4px 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.08), 0 2px 8px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  /* Use a smooth transition for width changes as words rotate */
+  transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.rotating-text-word {
+  display: inline-flex;
+  white-space: nowrap;
+  position: absolute;
+  left: 16px; /* Align with container padding */
+  top: 4px;   /* Align with container padding */
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.rotating-text-word.is-active {
+  position: relative;
+  left: 0;
+  top: 0;
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+/* When exiting, keep it positioned absolutely so it overlaps with the entering word */
+.rotating-text-word.animate-out {
+  position: absolute;
+  left: 16px; /* Align with container padding */
+  top: 4px;   /* Align with container padding */
+  opacity: 1;
+  visibility: visible;
+}
+
+.rotating-text-char {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+/* Entering Animation (springy slide up + fade) */
+.rotating-text-word.animate-in .rotating-text-char {
+  animation: rotateCharIn 0.42s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation-delay: var(--delay);
+}
+
+/* Exiting Animation (smooth slide up + fade out) */
+.rotating-text-word.animate-out .rotating-text-char {
+  animation: rotateCharOut 0.32s cubic-bezier(0.25, 1, 0.50, 1) both;
+  animation-delay: var(--delay);
+}
+
+@keyframes rotateCharIn {
+  0% {
+    transform: translateY(110%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes rotateCharOut {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-110%);
+    opacity: 0;
+  }
+}
